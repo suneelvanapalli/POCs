@@ -6,13 +6,13 @@ using System.Web;
 
 namespace CustomSectionWebConfigPOC
 {
-    [ConfigurationCollection(typeof(EventsDispatchConfigurationElement))]
-    public class GenericConfigurationElementCollection : ConfigurationElementCollection
+    [ConfigurationCollection(typeof(EndPoint))]
+    public class EndPointCollection : ConfigurationElementCollection
     {
         
-        public EventsDispatchConfigurationElement this[int index]
+        public EndPoint this[int index]
         {
-            get { return (EventsDispatchConfigurationElement)BaseGet(index); }
+            get { return (EndPoint)BaseGet(index); }
             set
             {
                 if (BaseGet(index) != null)
@@ -22,46 +22,42 @@ namespace CustomSectionWebConfigPOC
                 BaseAdd(index, value);
             }
         }
-               
+
+       public EndPoint GetElement(string name)
+        {
+            return (EndPoint)this.BaseGet(name);
+            
+        }
+
+        
+
 
         protected override ConfigurationElement CreateNewElement()
         {
-            return new EventsDispatchConfigurationElement();
+            return new EndPoint();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((EventsDispatchConfigurationElement)element).Name;
+            return ((EndPoint)element).Name;
         }
 
        
         
     }
 
-    public class DispatcherConfigurationSection : ConfigurationSection
-    {
-        [ConfigurationProperty("maxRetry", IsRequired = false, DefaultValue = 5)]
-        public int MaxRetry
-        {
-            get
-            {
-                return (int)this["maxRetry"];
-            }
-            set
-            {
-                this["maxRetry"] = value;
-            }
-        }
+    public class PortalServerEndPoints : ConfigurationSection
+    {      
 
-        [ConfigurationProperty("eventsDispatches", IsRequired = true)]
-        [ConfigurationCollection(typeof(EventsDispatchConfigurationElement), AddItemName = "add", ClearItemsName = "clear", RemoveItemName = "remove")]
-        public GenericConfigurationElementCollection EventsDispatches
+        [ConfigurationProperty("endpoints", IsRequired = true)]
+        [ConfigurationCollection(typeof(EndPoint), AddItemName = "endpoint")]
+        public EndPointCollection EndPoints
         {
-            get { return (GenericConfigurationElementCollection)this["eventsDispatches"]; }
+            get { return (EndPointCollection)this["endpoints"]; }
         }
     }
 
-    public class EventsDispatchConfigurationElement : ConfigurationElement
+    public class EndPoint : ConfigurationElement
     {
         [ConfigurationProperty("name", IsRequired = true)]
         public string Name
@@ -73,6 +69,19 @@ namespace CustomSectionWebConfigPOC
             set
             {
                 this["name"] = value;
+            }
+        }
+
+        [ConfigurationProperty("route", IsRequired = true)]
+        public string Route
+        {
+            get
+            {
+                return (string)this["route"];
+            }
+            set
+            {
+                this["route"] = value;
             }
         }
     }

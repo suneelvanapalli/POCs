@@ -12,10 +12,12 @@ namespace CustomSectionWebConfigPOC.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            
-         var  config = (DispatcherConfigurationSection) 
-                     ConfigurationManager.GetSection("dispatcherConfigurationSection");
-            
+
+            //To retrieve from custom config section-----------------------------------
+            var config = (PortalServerEndPoints) 
+                          ConfigurationManager.GetSection("PortalServerEndPoints");
+
+           var elem= config.EndPoints.GetElement("getuserdetails");
             return View();
         }
     }
