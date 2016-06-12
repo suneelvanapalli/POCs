@@ -19,7 +19,7 @@ namespace SetupIOCUnitTestingMock.Controllers
         public ActionResult Index()
         {
             var _isDFN = _adviser.IsDFM();
-
+            ViewBag.IsDFM = _isDFN;
             return View();
         }
 
