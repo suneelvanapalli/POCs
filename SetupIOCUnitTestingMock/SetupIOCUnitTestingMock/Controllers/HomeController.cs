@@ -8,8 +8,18 @@ namespace SetupIOCUnitTestingMock.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IAdviser _adviser;
+        
+        public HomeController(IAdviser adviser)
+        {
+            _adviser = adviser;
+        }
+
+
         public ActionResult Index()
         {
+            var _isDFN = _adviser.IsDFM();
+
             return View();
         }
 
