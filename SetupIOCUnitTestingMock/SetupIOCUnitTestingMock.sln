@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetupIOCUnitTestingMock", "SetupIOCUnitTestingMock\SetupIOCUnitTestingMock.csproj", "{F4879715-B4DF-4C5A-A97D-ABD414D13DB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SetupIOCUnitTestingMock.Tests", "SetupIOCUnitTestingMock.Tests\SetupIOCUnitTestingMock.Tests.csproj", "{B98B54AA-6711-4195-9872-B2DD043A99EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4879715-B4DF-4C5A-A97D-ABD414D13DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4879715-B4DF-4C5A-A97D-ABD414D13DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4879715-B4DF-4C5A-A97D-ABD414D13DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4879715-B4DF-4C5A-A97D-ABD414D13DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B98B54AA-6711-4195-9872-B2DD043A99EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B98B54AA-6711-4195-9872-B2DD043A99EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B98B54AA-6711-4195-9872-B2DD043A99EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B98B54AA-6711-4195-9872-B2DD043A99EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
