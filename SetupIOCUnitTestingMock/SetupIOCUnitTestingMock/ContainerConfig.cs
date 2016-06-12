@@ -20,6 +20,7 @@ namespace SetupIOCUnitTestingMock
             //   builder.RegisterType<HomeController>().InstancePerRequest();
             builder.RegisterType<Adviser>().As<IAdviser>().SingleInstance();
 
+            builder.RegisterFilterProvider();
 
             var container = builder.Build();
 

@@ -15,7 +15,7 @@ namespace SetupIOCUnitTestingMock.Controllers
             _adviser = adviser;
         }
 
-
+        [LogFilter]
         public ActionResult Index()
         {
             var _isDFN = _adviser.IsDFM();
