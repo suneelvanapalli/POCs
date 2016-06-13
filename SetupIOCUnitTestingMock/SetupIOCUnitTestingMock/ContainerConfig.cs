@@ -1,10 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using SetupIOCUnitTestingMock.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using SetupIOCUnitTestingMock.Business.Interfaces;
+using SetupIOCUnitTestingMock.Business.Services;
+using SetupIOCUnitTestingMock.Configuration;
 using System.Web.Mvc;
 
 namespace SetupIOCUnitTestingMock
@@ -19,6 +17,7 @@ namespace SetupIOCUnitTestingMock
 
             //   builder.RegisterType<HomeController>().InstancePerRequest();
             builder.RegisterType<Adviser>().As<IAdviser>().SingleInstance();
+            builder.RegisterType<WebConfigurationManager>().As<IConfigurationManager>().SingleInstance();
 
             builder.RegisterFilterProvider();
 

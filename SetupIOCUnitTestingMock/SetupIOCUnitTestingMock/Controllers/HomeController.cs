@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SetupIOCUnitTestingMock.Business.Interfaces;
+using SetupIOCUnitTestingMock.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,10 +11,12 @@ namespace SetupIOCUnitTestingMock.Controllers
     public class HomeController : Controller
     {
         private readonly IAdviser _adviser;
+        private readonly IConfigurationManager _configManager;
         
-        public HomeController(IAdviser adviser)
+        public HomeController(IAdviser adviser, IConfigurationManager configManager)
         {
             _adviser = adviser;
+            _configManager = configManager;
         }
 
         [LogFilter]
@@ -25,6 +29,9 @@ namespace SetupIOCUnitTestingMock.Controllers
 
         public ActionResult About()
         {
+            var route = _configManager.GetPortalServerEndPoint("getuserdetails");
+
+            ViewBag.Route = route;
             ViewBag.Message = "Your application description page.";
 
             return View();
