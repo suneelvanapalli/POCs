@@ -9,6 +9,10 @@ namespace LINQSamples
 {
    public  class Helper
     {
+
+       /// <summary>
+       /// Writes the calling method name to the console.
+       /// </summary>
        public static void LogMethodName()
         {
             var stackTrace = new StackTrace();
@@ -24,6 +28,10 @@ namespace LINQSamples
             }
         }
 
+       /// <summary>
+       /// Invokes all the static methods of the passed type
+       /// </summary>
+       /// <param name="type"></param>
        public static void InvokeAllStaticMethods(Type type)
         {
             var methodInfos = type.GetMethods(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
