@@ -39,8 +39,18 @@ namespace LINQSamples
                 new Adviser() { AdviserID="3", FirstName = "Ben", LastName="Twining" }
             };
 
-            Helper.Dump<Adviser>(advisers);
+
+
+            Helper.Dump<Adviser>(advisers.Where(NameStartsWith));
+
+             Console.WriteLine(advisers.MyCount());
         }
+
+        private bool NameStartsWith(Adviser adv)
+        {
+            return adv.FirstName.StartsWith("s", StringComparison.OrdinalIgnoreCase);
+        }
+
 
 
 
