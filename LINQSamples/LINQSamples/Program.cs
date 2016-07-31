@@ -9,6 +9,14 @@ namespace LINQSamples
 {
     class Program
     {
+
+     static   IEnumerable<Adviser> advisers = new List<Adviser>()
+            {
+                new Adviser() { AdviserID="1", FirstName = "Suneel", LastName="Vanapalli" },
+                new Adviser() { AdviserID="2", FirstName = "Michael", LastName="Pullen" },
+                new Adviser() { AdviserID="3", FirstName = "Ben", LastName="Twining" }
+            };
+
         static void Main(string[] args)
         {
             Helper.InvokeAllStaticMethods(typeof(Program));
@@ -32,18 +40,15 @@ namespace LINQSamples
 
         public static void LinQQueryOfObjecsts()
         {
-            IEnumerable<Adviser> advisers = new List<Adviser>()
-            {
-                new Adviser() { AdviserID="1", FirstName = "Suneel", LastName="Vanapalli" },
-                new Adviser() { AdviserID="2", FirstName = "Michael", LastName="Pullen" },
-                new Adviser() { AdviserID="3", FirstName = "Ben", LastName="Twining" }
-            };
 
+            Helper.Dump<Adviser>(advisers);
+            Console.WriteLine(advisers.MyCount());
+        }
 
-
-            Helper.Dump<Adviser>(advisers.Where(NameStartsWith));
-
-             Console.WriteLine(advisers.MyCount());
+        public static void CustomFilter()
+        {
+            var query  = advisers.Filter(m => m.FirstName.Length > 3);
+            Helper.Dump<Adviser>(query);
         }
 
         private bool NameStartsWith(Adviser adv)
