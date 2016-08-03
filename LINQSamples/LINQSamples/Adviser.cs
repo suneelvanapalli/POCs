@@ -10,6 +10,17 @@ namespace LINQSamples
     {
         public string AdviserID { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set; }
+
+        string _lastName;
+        public string LastName
+        {
+            get
+            {
+                Console.WriteLine("returned {_lastname}");
+                return _lastName;
+            }
+            set { _lastName = value; }
+        }
+
     }
 }

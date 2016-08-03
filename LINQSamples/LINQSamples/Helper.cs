@@ -24,7 +24,7 @@ namespace LINQSamples
         {
             foreach (var s in data)
             {
-                Console.WriteLine(s);
+               // Console.WriteLine(s);
             }
         }
 

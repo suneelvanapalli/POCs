@@ -48,7 +48,11 @@ namespace LINQSamples
         public static void CustomFilter()
         {
             var query  = advisers.Filter(m => m.FirstName.Length > 3);
-            Helper.Dump<Adviser>(query);
+            
+            foreach(var a in query)
+            {
+                Console.WriteLine(a.LastName);
+            }
         }
 
         private bool NameStartsWith(Adviser adv)
