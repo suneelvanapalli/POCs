@@ -1,0 +1,29 @@
+﻿@model List<AGLDeveloperTest.Models.ResultData>
+
+@{
+    ViewBag.Title = "Cats";
+}
+
+<h2>Cats grouped by Gender of the Owner</h2>
+
+<div>
+    
+    <hr />
+    <div class="dl-horizontal">
+        @foreach (var item in Model)
+        {
+            <p>
+                @item.gender
+            </p>
+
+            <ul>
+                @foreach (var cat in item.cats)
+                {
+                    <li>@cat.ToString()</li>
+                }
+            </ul>
+
+        }
+
+    </div>
+</div>
