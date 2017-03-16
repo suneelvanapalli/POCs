@@ -26,13 +26,16 @@ namespace autodemo
 
             element.Submit();
 
-            //element = driver.FindElementsByName("prism-search-input").Single();
-           // element.SendKeys("BDD");
-
-            //element.Submit();
-
             driver.Close();
 
         }
+
+
+
+
+
+
+
+
     }
 }
