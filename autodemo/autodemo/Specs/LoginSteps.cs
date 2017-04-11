@@ -20,14 +20,14 @@ namespace autodemo.Specs
         [AfterFeature]
         public static void Dispose()
         {
-            driver.Close();
+            //driver.Close();
         }
 
 
         [Given(@"I am an aviser")]
         public void GivenIAmAnAviser()
         {
-            var devDI = "http://bdtci01/PortalClientDEVDI/login";
+            var devDI = "http://bdt415sv/DST.OD.UI.OMW.Adviser/Login";
             driver.Navigate().GoToUrl(devDI);
         }
         
@@ -35,12 +35,14 @@ namespace autodemo.Specs
         public void WhenIEnterMyCredentials()
         {
             var element = driver.FindElementById("SetupPortalUsernameEntry");
-            element.SendKeys("fauser01");
+            element.SendKeys("fauser01");            
 
             element = driver.FindElementById("SetupPortalPasswordEntry");
             element.SendKeys("Password01#");
 
             element.Submit();
+
+
         }
         
         [Then(@"I should successfully login to the portal")]
@@ -48,5 +50,14 @@ namespace autodemo.Specs
         {
             Assert.AreEqual("Adviser", driver.Title);
         }
+
+        [Then(@"I should redirect to User profile page")]
+        public void WhenIShouldRedirectToUserProfilePage()
+        {
+            var url = "http://bdt415sv/DST.OD.UI.OMW.Adviser/system-admin/firm-admin-user-profile/#?uid=Fauser01";
+
+            driver.Navigate().GoToUrl(url);
+        }
+
     }
 }

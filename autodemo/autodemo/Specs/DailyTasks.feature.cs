@@ -18,21 +18,21 @@ namespace autodemo.Specs
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.2.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Login")]
-    public partial class LoginFeature
+    [NUnit.Framework.DescriptionAttribute("DailyTasks")]
+    public partial class DailyTasksFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Login.feature"
+#line 1 "DailyTasks.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Login", "\tIn order to access Adviser Portal\r\n\tAs a Adviser\r\n\tI want to login to the portal" +
-                    "", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "DailyTasks", "\tIn order to avoid getting reminder email from manager \r\n\tAs a dev\r\n\tI want to au" +
+                    "tomate daily stuff", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -64,44 +64,25 @@ namespace autodemo.Specs
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("SubmitTimesheet")]
+        [NUnit.Framework.CategoryAttribute("mytag")]
+        public virtual void SubmitTimesheet()
         {
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("SubmitTimesheet", new string[] {
+                        "mytag"});
 #line 7
-testRunner.Given("I am an aviser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+this.ScenarioSetup(scenarioInfo);
 #line 8
-testRunner.When("I enter my credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Login to the portal")]
-        [NUnit.Framework.CategoryAttribute("pc")]
-        public virtual void LoginToThePortal()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login to the portal", new string[] {
-                        "pc"});
+ testRunner.Given("I open browser with url \'https://rms.dstbluedoor.com/\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 9
+ testRunner.But("login with my credentials", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "But ");
+#line 10
+ testRunner.And("redirect to timehseet for this week", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 11
+ testRunner.When("I enter RMS code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 12
-this.ScenarioSetup(scenarioInfo);
-#line 6
-this.FeatureBackground();
-#line 13
- testRunner.Then("I should successfully login to the portal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Redirect to user profile page")]
-        public virtual void RedirectToUserProfilePage()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Redirect to user profile page", ((string[])(null)));
-#line 15
-this.ScenarioSetup(scenarioInfo);
-#line 6
-this.FeatureBackground();
-#line 16
- testRunner.Then("I should redirect to User profile page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should save", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
