@@ -19,10 +19,11 @@ namespace TurtleCommand
         static void Main(string[] args)
         {
             bool exit = false;
-            bool IsValid = false;
+            bool IsValid = true;
 
             while (!exit)
             {
+                Console.WriteLine("Please enter next Command. Enter Help to know the valid commands");
                 var input = Console.ReadLine();
                 args = input.Split(new String[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 var operation = args[0];
@@ -59,6 +60,14 @@ namespace TurtleCommand
                     case Operation.Exit:
                         exit = true;
                         break;
+                    case Operation.Help:
+                        Console.WriteLine(@"
+                                         PLACE X,Y,F
+                                         MOVE
+                                         LEFT
+                                         RIGHT
+                                         REPORT");
+                        break;
                 }
                 if (!IsValid)
                     Console.WriteLine("Invalid arguments. Please use Help command to get the command details");
@@ -74,6 +83,7 @@ namespace TurtleCommand
         Left,
         Right,
         Report,
-        Exit
+        Exit,
+        Help
     }
 }
