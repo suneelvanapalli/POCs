@@ -25,9 +25,13 @@ namespace TurtleCommand
             get { return _XCoOrdinate; }
             set
             {
-                if (value >= 0 && value <= XLimit)
+                if (value >= 0 && value < XLimit)
                 {
                     _XCoOrdinate = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid X Position");
                 }
             }
         }
@@ -41,9 +45,13 @@ namespace TurtleCommand
             }
             set
             {
-                if (value >= 0 && value <= YLimit)
+                if (value >= 0 && value < YLimit)
                 {
                     _YCoOrdinate = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid Y Position");
                 }
             }
         }
@@ -57,7 +65,7 @@ namespace TurtleCommand
 
         public void Left()
         {
-            var newDirection =  this.CurrentDirection + 1;
+            var newDirection = this.CurrentDirection + 1;
             if ((int)newDirection == 4) this.CurrentDirection = Direction.East;
             else this.CurrentDirection = newDirection;
 
@@ -65,7 +73,7 @@ namespace TurtleCommand
 
         public void Right()
         {
-            var newDirection = this.CurrentDirection- 1;
+            var newDirection = this.CurrentDirection - 1;
             if ((int)newDirection == -1) this.CurrentDirection = Direction.South;
             else this.CurrentDirection = newDirection;
         }
@@ -85,9 +93,20 @@ namespace TurtleCommand
 
         public void Place(int x, int y, Direction direction)
         {
-            this.XCoOrdinate = x;
-            this.YCoOrdinate = y;
-            this.CurrentDirection = direction;
+            try
+            {
+                this.XCoOrdinate = x;
+                this.YCoOrdinate = y;
+                this.CurrentDirection = direction;
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
