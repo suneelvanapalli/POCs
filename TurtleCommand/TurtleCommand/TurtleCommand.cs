@@ -6,10 +6,10 @@ namespace TurtleCommand
 {
     public enum Direction
     {
-        East = 360,
-        North = 90,
-        West = 180,
-        South = 270
+        East = 0,
+        North = 1,
+        West = 2,
+        South = 3
     }
 
     public class TurtleCommand
@@ -19,8 +19,34 @@ namespace TurtleCommand
 
         private const int BaseAngle = 360;
 
-        int XCoOrdinate { get; set; }
-        int YCoOrdinate { get; set; }
+        int _XCoOrdinate;
+        private int XCoOrdinate
+        {
+            get { return _XCoOrdinate; }
+            set
+            {
+                if (value >= 0 && value <= XLimit)
+                {
+                    _XCoOrdinate = value;
+                }
+            }
+        }
+
+        int _YCoOrdinate;
+        int YCoOrdinate
+        {
+            get
+            {
+                return _YCoOrdinate;
+            }
+            set
+            {
+                if (value >= 0 && value <= YLimit)
+                {
+                    _YCoOrdinate = value;
+                }
+            }
+        }
 
         public Direction CurrentDirection { get; set; }
         public TurtleCommand(int x, int y)
@@ -31,20 +57,25 @@ namespace TurtleCommand
 
         public void Left()
         {
-            this.CurrentDirection = (BaseAngle - this.CurrentDirection) + 90;
+            var newDirection =  this.CurrentDirection + 1;
+            if ((int)newDirection == 4) this.CurrentDirection = Direction.East;
+            else this.CurrentDirection = newDirection;
+
         }
 
         public void Right()
         {
-            this.CurrentDirection = (BaseAngle - this.CurrentDirection) - 90;
+            var newDirection = this.CurrentDirection- 1;
+            if ((int)newDirection == -1) this.CurrentDirection = Direction.South;
+            else this.CurrentDirection = newDirection;
         }
 
         public void Move()
         {
-            if (CurrentDirection == Direction.North) XCoOrdinate = (XLimit - XCoOrdinate++);
-            if (CurrentDirection == Direction.South) XCoOrdinate = (XLimit - XCoOrdinate--);
-            if (CurrentDirection == Direction.East) YCoOrdinate = (YLimit - YCoOrdinate++);
-            if (CurrentDirection == Direction.West) YCoOrdinate = (YLimit - YCoOrdinate--);
+            if (CurrentDirection == Direction.North) this.YCoOrdinate++;
+            if (CurrentDirection == Direction.South) this.YCoOrdinate--;
+            if (CurrentDirection == Direction.East) this.XCoOrdinate++;
+            if (CurrentDirection == Direction.West) this.XCoOrdinate--;
         }
 
         public Tuple<int, int, Direction> Report()
