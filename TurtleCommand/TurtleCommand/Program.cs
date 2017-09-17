@@ -96,7 +96,8 @@ namespace TurtleCommand
                                          MOVE
                                          LEFT
                                          RIGHT
-                                         REPORT");
+                                         REPORT
+                                         File <path>       ");
                     break;
 
             }
