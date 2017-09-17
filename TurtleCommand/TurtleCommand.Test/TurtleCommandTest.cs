@@ -48,5 +48,15 @@ namespace TurtleCommand.Test
             Assert.AreEqual(report.Item2, 3);
             Assert.AreEqual(report.Item3, Direction.North);
         }
+
+        [TestMethod]
+        public void TurtleIgnoringOtherCommandsBeforePlacedOnTable()
+        {
+            var turtleCommand = new TurtleCommand(5, 5);
+            turtleCommand.Left();
+            Assert.Equals(turtleCommand.CurrentDirection, null);
+            Assert.Equals(turtleCommand.XCoOrdinate, null);
+            Assert.Equals(turtleCommand.YCoOrdinate, null);
+        }
     }
 }

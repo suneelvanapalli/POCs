@@ -12,22 +12,27 @@ namespace TurtleCommand
         South = 3
     }
 
+    public class ValidationResult<T>
+    {
+        public bool IsSuccess { get; set; }
+        public string Message { get; set; }
+        public T Result { get; set; }
+    }
+
     public class TurtleCommand
     {
         private int XLimit { get; }
         private int YLimit { get; }
 
-        private const int BaseAngle = 360;
-
-        int _XCoOrdinate;
-        private int XCoOrdinate
+        int? _XCoOrdinate;
+        public int? XCoOrdinate
         {
             get { return _XCoOrdinate; }
             set
             {
-                if (value >= 0 && value < XLimit)
+                if (value.HasValue && value.Value >= 0 && value.Value < XLimit)
                 {
-                    _XCoOrdinate = value;
+                    _XCoOrdinate = value.Value;
                 }
                 else
                 {
@@ -36,8 +41,8 @@ namespace TurtleCommand
             }
         }
 
-        int _YCoOrdinate;
-        int YCoOrdinate
+        int? _YCoOrdinate;
+        public int? YCoOrdinate
         {
             get
             {
@@ -45,7 +50,7 @@ namespace TurtleCommand
             }
             set
             {
-                if (value >= 0 && value < YLimit)
+                if (value.HasValue && value.Value >= 0 && value.Value < YLimit)
                 {
                     _YCoOrdinate = value;
                 }
@@ -56,40 +61,98 @@ namespace TurtleCommand
             }
         }
 
-        public Direction CurrentDirection { get; set; }
+        public Direction? CurrentDirection { get; set; }
         public TurtleCommand(int x, int y)
         {
             XLimit = x;
             YLimit = y;
         }
 
-        public void Left()
+        private bool HasBeenPlaced()
         {
+            return this.XCoOrdinate.HasValue && this.YCoOrdinate.HasValue && this.CurrentDirection.HasValue;
+        }
+
+        public ValidationResult Left()
+        {
+            if (!HasBeenPlaced())
+            {
+                return new ValidationResult()
+                {
+                    IsSuccess = false,
+                    Message = "Please enter valid Place command before using Left command"
+                };
+            }
+            //Console.WriteLine("Please enter valid Place command before Left command");
             var newDirection = this.CurrentDirection + 1;
             if ((int)newDirection == 4) this.CurrentDirection = Direction.East;
             else this.CurrentDirection = newDirection;
 
+            return new ValidationResult()
+            {
+                IsSuccess = true
+            };
         }
 
-        public void Right()
+        public ValidationResult Right()
         {
+            if (!HasBeenPlaced())
+            {
+                return new ValidationResult()
+                {
+                    IsSuccess = false,
+                    Message = "Please enter valid Place command before Right command"
+                };
+            }
             var newDirection = this.CurrentDirection - 1;
             if ((int)newDirection == -1) this.CurrentDirection = Direction.South;
             else this.CurrentDirection = newDirection;
+
+            return new ValidationResult()
+            {
+                IsSuccess = true
+            };
         }
 
-        public void Move()
+        public ValidationResult Move()
         {
+            if (!HasBeenPlaced())
+            {
+                return new ValidationResult()
+                {
+                    IsSuccess = false,
+                    Message = "Please enter valid Place command before Move command"
+                };
+            }
+            if (!HasBeenPlaced()) Console.WriteLine("Please enter valid Place command before Move command");
             if (CurrentDirection == Direction.North) this.YCoOrdinate++;
             if (CurrentDirection == Direction.South) this.YCoOrdinate--;
             if (CurrentDirection == Direction.East) this.XCoOrdinate++;
             if (CurrentDirection == Direction.West) this.XCoOrdinate--;
+
+            return new ValidationResult()
+            {
+                IsSuccess = true
+            };
+
         }
 
         public Tuple<int, int, Direction> Report()
         {
-            return new Tuple<int, int, Direction>(XCoOrdinate, YCoOrdinate, this.CurrentDirection);
+            if (!HasBeenPlaced())
+            {
+                return new ValidationResult()
+                {
+                    IsSuccess = false,
+                    Message = "Please enter valid Place command before Report command"
+                };
+            }
+            if (!HasBeenPlaced()) Console.WriteLine("Please enter valid Place command before Report command");
+            return new Tuple<int, int, Direction>(XCoOrdinate.Value, YCoOrdinate.Value, this.CurrentDirection.Value);
+
         }
+
+        
 
         public void Place(int x, int y, Direction direction)
         {

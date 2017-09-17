@@ -3,23 +3,12 @@
 namespace TurtleCommand
 {
     class Program
-    {
-        private static TurtleCommand _turtleCommand;
-        public static TurtleCommand Command
-        {
-            get
-            {
-                if (_turtleCommand == null)
-                {
-                    _turtleCommand = new TurtleCommand(5, 5);
-                }
-                return _turtleCommand;
-            }
-        }
+    {      
         static void Main(string[] args)
         {
             bool exit = false;
             bool IsValid = true;
+            var turtleCommand = new TurtleCommand(5, 5);
 
             while (!exit)
             {
@@ -28,12 +17,12 @@ namespace TurtleCommand
                 args = input.Split(new String[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                 var operation = args[0];
                 var IsValidOperation = Enum.TryParse(operation, true, out Operation parsedOperation);
-
-
+                
                 if (!IsValidOperation)
                 {
                     throw new ArgumentException("Invalid entity history type.");
                 }
+
                 switch (parsedOperation)
                 {
                     case Operation.Place:
@@ -42,19 +31,19 @@ namespace TurtleCommand
                         var IsValidYPosition = int.TryParse(args[2], out int yPosition);
                         var IsValidDirection = Enum.TryParse(args[3], true, out Direction direction);
                         IsValid = IsValidXPosition && IsValidYPosition && IsValidDirection;
-                        if (IsValid) Command.Place(xPosition, yPosition, direction);
+                        if (IsValid) turtleCommand.Place(xPosition, yPosition, direction);
                         break;
                     case Operation.Left:
-                        Command.Left();
+                        turtleCommand.Left();
                         break;
                     case Operation.Right:
-                        Command.Right();
+                        turtleCommand.Right();
                         break;
                     case Operation.Move:
-                        Command.Move();
+                        turtleCommand.Move();
                         break;
                     case Operation.Report:
-                        var positionDetails = Command.Report();
+                        var positionDetails = turtleCommand.Report();
                         Console.WriteLine($"{positionDetails.Item1} {positionDetails.Item2} {positionDetails.Item3}");
                         break;
                     case Operation.Exit:
