@@ -12,11 +12,10 @@ namespace TurtleCommand
         South = 3
     }
 
-    public class ValidationResult<T>
+    public class ValidationResult
     {
         public bool IsSuccess { get; set; }
         public string Message { get; set; }
-        public T Result { get; set; }
     }
 
     public class TurtleCommand
@@ -137,34 +136,39 @@ namespace TurtleCommand
 
         }
 
-        public Tuple<int, int, Direction> Report()
+        public Tuple<int?, int?, Direction?, ValidationResult> Report()
         {
             if (!HasBeenPlaced())
             {
-                return new ValidationResult()
+                return new Tuple<int?, int?, Direction?, ValidationResult>(null, null, null, new ValidationResult()
                 {
                     IsSuccess = false,
                     Message = "Please enter valid Place command before Report command"
-                };
+                });
             }
             if (!HasBeenPlaced()) Console.WriteLine("Please enter valid Place command before Report command");
-            return new Tuple<int, int, Direction>(XCoOrdinate.Value, YCoOrdinate.Value, this.CurrentDirection.Value);
+            return new Tuple<int?, int?, Direction?, ValidationResult>(XCoOrdinate.Value, YCoOrdinate.Value, this.CurrentDirection.Value, new ValidationResult() { IsSuccess = true });
 
         }
 
-        
 
-        public void Place(int x, int y, Direction direction)
+
+        public ValidationResult Place(int x, int y, Direction direction)
         {
             try
             {
                 this.XCoOrdinate = x;
                 this.YCoOrdinate = y;
                 this.CurrentDirection = direction;
+                return new ValidationResult() { IsSuccess = true };
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine(ex.Message);
+                return new ValidationResult()
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
             }
             catch (Exception)
             {
