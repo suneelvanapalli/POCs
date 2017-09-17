@@ -1,0 +1,6 @@
+Place 1,2,East
+Move
+Move
+LEFT
+MOVE
+REPORT

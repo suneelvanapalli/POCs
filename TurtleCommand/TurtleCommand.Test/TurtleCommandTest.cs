@@ -54,9 +54,9 @@ namespace TurtleCommand.Test
         {
             var turtleCommand = new TurtleCommand(5, 5);
             turtleCommand.Left();
-            Assert.Equals(turtleCommand.CurrentDirection, null);
-            Assert.Equals(turtleCommand.XCoOrdinate, null);
-            Assert.Equals(turtleCommand.YCoOrdinate, null);
+            Assert.AreEqual(turtleCommand.CurrentDirection, null);
+            Assert.AreEqual(turtleCommand.XCoOrdinate, null);
+            Assert.AreEqual(turtleCommand.YCoOrdinate, null);
         }
     }
 }
